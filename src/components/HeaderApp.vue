@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <header class="header">
     <div class="main-section">
       <div id="logo">knstch</div>
       <div class="menu">
@@ -28,14 +28,14 @@
       </div>
       <input type="text" placeholder="Find your item" id="search" />
     </div>
-  </div>
+  </header>
 </template>
 <script lang="ts">
 export default { name: "HeaderApp" };
 </script>
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Albert+Sans:wght@200;400;600;800&display=swap");
-
+//Styles for header
 .header {
   width: 100%;
   background-color: #9772fb;
@@ -56,7 +56,7 @@ export default { name: "HeaderApp" };
       font-size: 42px;
       color: #f2f2f2;
     }
-
+    //Styles for menu elements
     .dropdown-menu {
       position: relative;
       display: inline-block;
