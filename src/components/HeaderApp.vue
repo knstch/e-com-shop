@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="main-section">
-      <div id="logo">knstch</div>
+      <div id="logo"><a href="/">knstch</a></div>
       <div class="menu">
         <div class="dropdown-menu">
           My favorite marmalade
@@ -51,10 +51,13 @@ export default { name: "HeaderApp" };
     align-items: center;
     justify-content: space-between;
     #logo {
-      font-family: "Abril Fatface", cursive;
-      font-weight: 800;
-      font-size: 42px;
-      color: #f2f2f2;
+      a {
+        font-family: "Abril Fatface", cursive;
+        font-weight: 800;
+        font-size: 42px;
+        color: #f2f2f2;
+        text-decoration: none;
+      }
     }
     //Styles for menu elements
     .dropdown-menu {

@@ -15,8 +15,8 @@
           <h3 class="price">2300 THB</h3>
         </div>
         <div class="button-actions">
-          <button class="cart">Add to cart</button>
-          <button class="favorite">Add to favorite</button>
+          <button class="add-cart">Add to cart</button>
+          <button class="add-favorite">Add to favorite</button>
         </div>
       </div>
       <div class="card">
@@ -33,8 +33,8 @@
           <h3 class="price">2300 THB</h3>
         </div>
         <div class="button-actions">
-          <button class="cart">Add to cart</button>
-          <button class="favorite">Add to favorite</button>
+          <button class="add-cart">Add to cart</button>
+          <button class="add-favorite">Add to favorite</button>
         </div>
       </div>
       <div class="card">
@@ -51,10 +51,17 @@
           <h3 class="price">2300 THB</h3>
         </div>
         <div class="button-actions">
-          <button class="cart">Add to cart</button>
-          <button class="favorite">Add to favorite</button>
+          <button class="add-cart">Add to cart</button>
+          <button class="add-favorite">Add to favorite</button>
         </div>
       </div>
+    </div>
+    <div class="cart">
+      <img
+        class="cart-img"
+        src="https://www.svgrepo.com/show/22457/cart.svg"
+        alt="cart"
+      />
     </div>
   </main>
 </template>
@@ -73,6 +80,7 @@ export default {};
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 30px;
+
   //Styles for cards, catalog elements
   .card {
     background-color: #f2f2f2;
@@ -102,7 +110,8 @@ export default {};
       display: flex;
       flex-direction: row;
       gap: 10px;
-      .favorite {
+
+      .add-favorite {
         cursor: pointer;
         background-color: #f32424;
         color: #f2f2f2;
@@ -111,13 +120,15 @@ export default {};
         border-radius: 5px;
         transition: background-color 0.2s;
       }
-      .favorite:hover {
+
+      .add-favorite:hover {
         background-color: #f2f2f2;
         color: #f32424;
         outline: 1px solid #f32424;
         outline-offset: -1px;
       }
-      .cart {
+
+      .add-cart {
         cursor: pointer;
         background-color: #764af1;
         color: #f2f2f2;
@@ -127,7 +138,7 @@ export default {};
         transition: background-color 0.2s;
       }
 
-      .cart:hover {
+      .add-cart:hover {
         background-color: #f2f2f2;
         color: #9772fb;
         outline: 1px solid #9772fb;
@@ -135,5 +146,30 @@ export default {};
       }
     }
   }
+}
+
+.cart {
+  cursor: pointer;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 2px solid #f32424;
+  transition: transform 0.2s;
+  .cart-img {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    top: 14px;
+    right: 16px;
+  }
+}
+.cart:hover {
+  transform: scale(1.1);
 }
 </style>
