@@ -50,6 +50,7 @@ export default { name: "HeaderApp" };
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     #logo {
       a {
         font-family: "Abril Fatface", cursive;

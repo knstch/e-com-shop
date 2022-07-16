@@ -1,18 +1,21 @@
 <template>
   <main>
     <div class="product-cards">
-      <div class="card">
-        <img
-          src="https://71.img.avito.st/image/1/1.3hrdJra6cvPrj7D27TWWBjqFdPdpBXoxbIV2-2mNcA.g6DVq3_h4xIArCMhgz0KZi2LAxeq9urraZeo6uucwKg"
-          alt=""
-        />
+      <div
+        class="card"
+        v-for="product in productsContainer"
+        :id="product._id"
+        :key="product._id"
+      >
+        <div class="img-container">
+          <img :src="product.img" :alt="product.desc" />
+        </div>
         <div class="info-card">
-          <h2>Test</h2>
+          <h2>{{ product.name }}</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,
-            eveniet?
+            {{ product.desc }}
           </p>
-          <h3 class="price">2300 THB</h3>
+          <h3 class="price">{{ product.price }} THB</h3>
         </div>
         <div class="button-actions">
           <button class="add-cart">Add to cart</button>
@@ -32,6 +35,7 @@
 import { defineComponent } from "vue";
 import CartBuy from "../components/CartBuy.vue";
 import BuyModal from "./BuyModal.vue";
+import axios from "axios";
 export default defineComponent({
   name: "BodyApp",
   components: {
@@ -41,8 +45,12 @@ export default defineComponent({
   data() {
     return {
       showModal: false,
-      aboba: 2,
+      productsContainer: [],
     };
+  },
+  async mounted() {
+    const getProducts = await axios.get("http://localhost:3000/api/shop-items");
+    this.productsContainer = getProducts.data;
   },
   methods: {
     displayModal(): boolean {
@@ -66,31 +74,42 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 30px;
 
   //Styles for cards, catalog elements
   .card {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
     background-color: #f2f2f2;
-    width: 28%;
+    width: 300px;
     padding: 10px;
     border-radius: 10px;
-
-    img {
-      max-width: 100%;
+    .img-container {
+      height: 60%;
+      overflow: hidden;
       border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        max-width: 100%;
+        border-radius: inherit;
+      }
     }
 
     .info-card {
       padding: 10px;
-
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
       h2 {
         text-align: center;
       }
 
       .price {
         text-align: center;
-        margin: 5px 0;
       }
     }
 
