@@ -16,7 +16,7 @@
         </div>
         <p>3000 THB</p>
       </div>
-      <button class="buy-cart-btn">Buy</button>
+      <button class="buy-cart-btn">Go to checkout</button>
     </div>
   </div>
 </template>

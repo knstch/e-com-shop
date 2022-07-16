@@ -19,42 +19,6 @@
           <button class="add-favorite">Add to favorite</button>
         </div>
       </div>
-      <div class="card">
-        <img
-          src="https://71.img.avito.st/image/1/1.3hrdJra6cvPrj7D27TWWBjqFdPdpBXoxbIV2-2mNcA.g6DVq3_h4xIArCMhgz0KZi2LAxeq9urraZeo6uucwKg"
-          alt=""
-        />
-        <div class="info-card">
-          <h2>Test</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,
-            eveniet?
-          </p>
-          <h3 class="price">2300 THB</h3>
-        </div>
-        <div class="button-actions">
-          <button class="add-cart">Add to cart</button>
-          <button class="add-favorite">Add to favorite</button>
-        </div>
-      </div>
-      <div class="card">
-        <img
-          src="https://71.img.avito.st/image/1/1.3hrdJra6cvPrj7D27TWWBjqFdPdpBXoxbIV2-2mNcA.g6DVq3_h4xIArCMhgz0KZi2LAxeq9urraZeo6uucwKg"
-          alt=""
-        />
-        <div class="info-card">
-          <h2>Test</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,
-            eveniet?
-          </p>
-          <h3 class="price">2300 THB</h3>
-        </div>
-        <div class="button-actions">
-          <button class="add-cart">Add to cart</button>
-          <button class="add-favorite">Add to favorite</button>
-        </div>
-      </div>
     </div>
     <CartBuy v-if="showModal == false" @click="displayModal()"></CartBuy>
     <BuyModal
