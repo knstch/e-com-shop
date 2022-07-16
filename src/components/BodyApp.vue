@@ -56,22 +56,46 @@
         </div>
       </div>
     </div>
-    <div class="cart">
-      <img
-        class="cart-img"
-        src="https://www.svgrepo.com/show/22457/cart.svg"
-        alt="cart"
-      />
-    </div>
+    <CartBuy v-if="showModal == false" @click="displayModal()"></CartBuy>
+    <BuyModal
+      v-else-if="showModal == true"
+      v-on:closeModal="closeModal"
+    ></BuyModal>
   </main>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import { defineComponent } from "vue";
+import CartBuy from "../components/CartBuy.vue";
+import BuyModal from "./BuyModal.vue";
+export default defineComponent({
+  name: "BodyApp",
+  components: {
+    CartBuy,
+    BuyModal,
+  },
+  data() {
+    return {
+      showModal: false,
+      aboba: 2,
+    };
+  },
+  methods: {
+    displayModal(): boolean {
+      return (this.showModal = true);
+    },
+    closeModal(): boolean {
+      return (this.showModal = false);
+    },
+  },
+});
 </script>
 
 <style scoped lang="scss">
 //Styles for catalog
+main {
+  display: flex;
+}
 .product-cards {
   width: 80%;
   margin: 60px 10%;
@@ -146,30 +170,5 @@ export default {};
       }
     }
   }
-}
-
-.cart {
-  cursor: pointer;
-  border-radius: 50%;
-  height: 70px;
-  width: 70px;
-  position: fixed;
-  bottom: 50px;
-  right: 100px;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.75);
-  border: 2px solid #f32424;
-  transition: transform 0.2s;
-  .cart-img {
-    position: absolute;
-    height: 40px;
-    width: 40px;
-    top: 14px;
-    right: 16px;
-  }
-}
-.cart:hover {
-  transform: scale(1.1);
 }
 </style>

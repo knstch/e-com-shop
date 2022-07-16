@@ -113,7 +113,7 @@ export default { name: "HeaderApp" };
 @keyframes fallingMenu {
   from {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(-5px);
   }
 
   to {
