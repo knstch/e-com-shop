@@ -1,10 +1,11 @@
 <template>
   <main>
-    <div class="product-cards">
+    <div class="product-cards" :class="{ fewProducts: isFewProducts }">
       <div
         class="card"
         v-for="product in productsContainer"
-        :id="product._id"
+        :_id="product._id"
+        :class="{ favorite: favProds.includes(product._id) }"
         :key="product._id"
       >
         <div class="img-container">
@@ -18,8 +19,23 @@
           <h3 class="price">{{ product.price }} THB</h3>
         </div>
         <div class="button-actions">
-          <button class="add-cart">Add to cart</button>
-          <button class="add-favorite">Add to favorite</button>
+          <button class="add-cart" @click="addToCart(product._id)">
+            Add to cart
+          </button>
+          <button
+            v-if="favProds.includes(product._id) == false"
+            class="add-favorite"
+            @click="addToFav(product._id)"
+          >
+            Add to favorite
+          </button>
+          <button
+            v-if="favProds.includes(product._id) == true"
+            class="add-favorite"
+            @click="removeFav(product._id)"
+          >
+            Remove favorite
+          </button>
         </div>
       </div>
     </div>
@@ -36,6 +52,21 @@ import { defineComponent } from "vue";
 import CartBuy from "../components/CartBuy.vue";
 import BuyModal from "./BuyModal.vue";
 import axios from "axios";
+
+declare interface Product {
+  _id: string;
+  img: string;
+  name: string;
+  desc: string;
+  price: number;
+}
+
+declare interface Cart {
+  _id: string;
+  quanity: number;
+  leftItems?: any;
+}
+
 export default defineComponent({
   name: "BodyApp",
   components: {
@@ -44,13 +75,23 @@ export default defineComponent({
   },
   data() {
     return {
-      showModal: false,
-      productsContainer: [],
+      showModal: false as boolean,
+      productsContainer: [] as Product[],
+      cart: [] as Cart[],
+      favProds: [] as string[],
+      isFewProducts: false as boolean,
     };
   },
   async mounted() {
     const getProducts = await axios.get("http://localhost:3000/api/shop-items");
     this.productsContainer = getProducts.data;
+    if (localStorage.getItem("cartItems")) {
+      this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
+    }
+    if (localStorage.getItem("favItems")) {
+      this.favProds = JSON.parse(localStorage.getItem("favItems") as string);
+    }
+    if (this.cart.length < 3) this.isFewProducts = true;
   },
   methods: {
     displayModal(): boolean {
@@ -59,12 +100,39 @@ export default defineComponent({
     closeModal(): boolean {
       return (this.showModal = false);
     },
+    addToCart(productId: string) {
+      this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
+      let cartItem;
+      for (let i = 0; i < this.cart.length; i++) {
+        if (this.cart[i]._id == productId) {
+          cartItem = this.cart[i];
+        }
+      }
+
+      if (cartItem) {
+        cartItem.quanity++;
+      } else if (!cartItem) {
+        this.cart.unshift({ _id: productId, quanity: 1 });
+      }
+      localStorage.setItem("cartItems", JSON.stringify(this.cart));
+    },
+    addToFav(productId: string) {
+      let checkFavProduct = this.favProds.includes(productId);
+      if (checkFavProduct == false) {
+        this.favProds.unshift(productId);
+        localStorage.setItem("favItems", JSON.stringify(this.favProds));
+        console.log(this.favProds);
+      }
+    },
+    removeFav(productId: string) {
+      this.favProds = this.favProds.filter((product) => product != productId);
+      localStorage.setItem("favItems", JSON.stringify(this.favProds));
+    },
   },
 });
 </script>
 
 <style scoped lang="scss">
-//Styles for catalog
 main {
   display: flex;
 }
@@ -74,18 +142,22 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 30px;
-
+  .favorite {
+    background-color: #f3242495 !important;
+    color: #f2f2f2;
+  }
   //Styles for cards, catalog elements
   .card {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     background-color: #f2f2f2;
-    width: 300px;
+    width: 320px;
     padding: 10px;
     border-radius: 10px;
+    transition: background-color 0.4s;
     .img-container {
       height: 60%;
       overflow: hidden;
@@ -153,5 +225,8 @@ main {
       }
     }
   }
+}
+.fewProducts {
+  justify-content: space-around;
 }
 </style>
