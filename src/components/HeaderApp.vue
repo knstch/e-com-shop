@@ -4,18 +4,18 @@
       <div id="logo"><a href="/">knstch</a></div>
       <div class="menu">
         <div class="dropdown-menu">
-          My favorite marmalade
+          <a class="link" href="#/marmelade">My favorite marmalade</a>
           <ul class="dropdown">
-            <li>Chupa chups</li>
-            <li>Haribo</li>
-            <li>Frutella</li>
+            <a class="link" href="#/chupachups"><li>Chupa chups</li></a>
+            <a class="link" href="#/haribo"><li>Haribo</li></a>
+            <a class="link" href="#/frutella"><li>Frutella</li></a>
           </ul>
         </div>
         <div class="dropdown-menu">
-          Lovely pizza
+          <a class="link" href="#/pizza">Lovely pizza</a>
           <ul class="dropdown">
-            <li>Pepperony</li>
-            <li>Spicy pizza</li>
+            <a class="link" href="#/pepperoni"><li>Pepperony</li></a>
+            <a class="link" href="#/spicypizza"><li>Spicy pizza</li></a>
           </ul>
         </div>
         <div class="dropdown-menu">
@@ -36,6 +36,10 @@ export default { name: "HeaderApp" };
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Albert+Sans:wght@200;400;600;800&display=swap");
 //Styles for header
+.link {
+  color: #f2f2f2;
+  text-decoration: none;
+}
 .header {
   width: 100%;
   background-color: #9772fb;
@@ -71,7 +75,9 @@ export default { name: "HeaderApp" };
       cursor: pointer;
       color: #f2f2f2;
       background-color: #764af1;
-
+      a {
+        color: #f2f2f2;
+      }
       ul {
         list-style: none;
         font-size: 14px;

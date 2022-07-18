@@ -1,44 +1,6 @@
 <template>
   <main>
-    <div class="product-cards" :class="{ fewProducts: isFewProducts }">
-      <div
-        class="card"
-        v-for="product in productsContainer"
-        :_id="product._id"
-        :class="{ favorite: favProds.includes(product._id) }"
-        :key="product._id"
-      >
-        <div class="img-container">
-          <img :src="product.img" :alt="product.desc" />
-        </div>
-        <div class="info-card">
-          <h2>{{ product.name }}</h2>
-          <p>
-            {{ product.desc }}
-          </p>
-          <h3 class="price">{{ product.price }} THB</h3>
-        </div>
-        <div class="button-actions">
-          <button class="add-cart" @click="addToCart(product._id)">
-            Add to cart
-          </button>
-          <button
-            v-if="favProds.includes(product._id) == false"
-            class="add-favorite"
-            @click="addToFav(product._id)"
-          >
-            Add to favorite
-          </button>
-          <button
-            v-if="favProds.includes(product._id) == true"
-            class="add-favorite"
-            @click="removeFav(product._id)"
-          >
-            Remove favorite
-          </button>
-        </div>
-      </div>
-    </div>
+    <router-view></router-view>
     <CartBuy v-if="showModal == false" @click="displayModal()"></CartBuy>
     <BuyModal
       v-else-if="showModal == true"
@@ -132,7 +94,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 main {
   display: flex;
 }
@@ -159,7 +121,7 @@ main {
     border-radius: 10px;
     transition: background-color 0.4s;
     .img-container {
-      height: 60%;
+      height: 350px;
       overflow: hidden;
       border-radius: 5px;
       display: flex;
@@ -190,21 +152,32 @@ main {
       flex-direction: row;
       gap: 10px;
 
-      .add-favorite {
+      .favorite {
         cursor: pointer;
-        background-color: #f32424;
+        background-color: #f32424 !important;
         color: #f2f2f2;
         padding: 12px;
         border: 0;
         border-radius: 5px;
         transition: background-color 0.2s;
+        transition: outline 0.2s;
+        transition: color 0.2s;
       }
 
-      .add-favorite:hover {
-        background-color: #f2f2f2;
+      .favorite:hover {
+        background-color: #f2f2f2 !important;
         color: #f32424;
         outline: 1px solid #f32424;
         outline-offset: -1px;
+      }
+
+      .remove {
+        background-color: #f2f2f2 !important;
+        color: #f32424 !important;
+      }
+      .remove:hover {
+        background-color: #f32424 !important;
+        color: #f2f2f2 !important;
       }
 
       .add-cart {
