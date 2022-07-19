@@ -58,7 +58,7 @@ declare interface Product {
 declare interface Cart {
   _id: string;
   quanity: number;
-  leftItems?: any;
+  leftItems?: number;
 }
 
 export default defineComponent({

@@ -129,6 +129,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .cart-modal-wrapped {
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;

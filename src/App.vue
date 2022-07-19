@@ -8,14 +8,15 @@
 import HeaderApp from "./components/HeaderApp.vue";
 import BodyApp from "./components/BodyApp.vue";
 import FooterApp from "./components/FooterApp.vue";
-export default {
+import { defineComponent } from "vue";
+export default defineComponent({
   name: "mainApp",
   components: {
     HeaderApp,
     BodyApp,
     FooterApp,
   },
-};
+});
 </script>
 
 <style lang="scss">

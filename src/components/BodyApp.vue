@@ -63,6 +63,7 @@ export default defineComponent({
       return (this.showModal = false);
     },
     addToCart(productId: string) {
+      console.log(productId);
       this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
       let cartItem;
       for (let i = 0; i < this.cart.length; i++) {
