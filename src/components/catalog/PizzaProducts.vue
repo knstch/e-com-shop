@@ -61,12 +61,6 @@ export default defineComponent({
     createCatalog(catalog: string) {
       this.$emit("createCatalog", catalog);
     },
-    displayModal() {
-      this.$emit("displayModal");
-    },
-    closeModal() {
-      this.$emit("closeModal");
-    },
     addToCart(productId: string) {
       this.$emit("addToCart", productId);
     },

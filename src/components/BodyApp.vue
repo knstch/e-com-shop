@@ -5,16 +5,14 @@
       :productsContainer="productsContainer"
       :cart="cart"
       v-on:createCatalog="createCatalog"
-      v-on:displayModal="displayModal"
-      v-on:closeModal="closeModal"
       v-on:addToCart="addToCart"
       v-on:addToFav="addToFav"
       v-on:removeFav="removeFav"
     ></router-view>
-    <CartBuy v-if="showModal == false" @click="displayModal()"></CartBuy>
+    <CartBuy v-if="showModal == false" @click="displayModal(true)"></CartBuy>
     <BuyModal
       v-else-if="showModal == true"
-      v-on:closeModal="closeModal"
+      v-on:displayModal="displayModal"
     ></BuyModal>
   </main>
 </template>
@@ -54,29 +52,31 @@ export default defineComponent({
       isFewProducts: false as boolean,
     };
   },
-  async mounted() {
-    const getProducts = await axios.get("http://localhost:3000/api/shop-items");
-    this.productsContainer = getProducts.data;
-    if (localStorage.getItem("cartItems")) {
-      this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
-    }
-    if (localStorage.getItem("favItems")) {
-      this.favProds = JSON.parse(localStorage.getItem("favItems") as string);
-    }
-    if (this.cart.length < 3) this.isFewProducts = true;
+  mounted() {
+    this.createCatalog();
+    this.loadStorage();
   },
   methods: {
-    async createCatalog(catalog: string) {
+    //Load data from DB to array to render products in catalog
+    async createCatalog(catalog?: string) {
       const getProducts = await axios.get(
         `http://localhost:3000/api/shop-items/${catalog}`
       );
       this.productsContainer = getProducts.data;
     },
-    displayModal(): boolean {
-      return (this.showModal = true);
+    //Load cart and favorite products from local storage
+    //Also, change catalog style if there're < 3 items
+    loadStorage() {
+      if (localStorage.getItem("cartItems")) {
+        this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
+      }
+      if (localStorage.getItem("favItems")) {
+        this.favProds = JSON.parse(localStorage.getItem("favItems") as string);
+      }
+      if (this.cart.length < 3) this.isFewProducts = true;
     },
-    closeModal(): boolean {
-      return (this.showModal = false);
+    displayModal(condition: boolean): boolean {
+      return (this.showModal = condition);
     },
     addToCart(productId: string) {
       console.log(productId);
@@ -106,9 +106,6 @@ export default defineComponent({
     removeFav(productId: string) {
       this.favProds = this.favProds.filter((product) => product != productId);
       localStorage.setItem("favItems", JSON.stringify(this.favProds));
-    },
-    aboba() {
-      console.log(1);
     },
   },
 });

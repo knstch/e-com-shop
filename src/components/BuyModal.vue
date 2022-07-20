@@ -1,8 +1,8 @@
 <template>
-  <div class="cart-modal-wrapped" @click="closeModal()">
+  <div class="cart-modal-wrapped" @click="displayModal(false)">
     <div class="show-cart" @click.stop="">
       <h2>Your cart:</h2>
-      <span class="close-modal" @click="closeModal()">&#215;</span>
+      <span class="close-modal" @click="displayModal(false)">&#215;</span>
       <div class="cart-container" v-if="modalCart.length > 0">
         <div
           v-for="productCart in modalCart"
@@ -57,9 +57,8 @@ export default defineComponent({
     };
   },
   methods: {
-    //Close modal
-    closeModal() {
-      this.$emit("closeModal");
+    displayModal(condition: boolean) {
+      this.$emit("displayModal", condition);
     },
     //Setting cart if any items were in local storage
     //Also, loads data from DB and create a new cart array
