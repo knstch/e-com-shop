@@ -19,7 +19,7 @@
           </ul>
         </div>
       </div>
-      <div class="search-filed">
+      <div class="search-fieled">
         <input
           type="text"
           placeholder="Find your item"
@@ -187,7 +187,7 @@ export default defineComponent({
         animation: fallingMenu 0.5s forwards;
       }
     }
-    .search-filed {
+    .search-fieled {
       display: flex;
       flex-direction: column;
       justify-self: flex-end;

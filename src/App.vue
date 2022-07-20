@@ -2,6 +2,7 @@
   <HeaderApp></HeaderApp>
   <BodyApp></BodyApp>
   <FooterApp></FooterApp>
+  <div id="adoption" v-if="screenWidth < 1200">Adoption is in proccess :(</div>
 </template>
 
 <script lang="ts">
@@ -15,6 +16,20 @@ export default defineComponent({
     HeaderApp,
     BodyApp,
     FooterApp,
+  },
+  data() {
+    return {
+      screenWidth: window.innerWidth as number,
+    };
+  },
+  methods: {
+    getWidth() {
+      this.screenWidth = window.innerWidth;
+      console.log(this.screenWidth);
+    },
+  },
+  created() {
+    window.addEventListener("resize", this.getWidth);
   },
 });
 </script>
@@ -38,5 +53,16 @@ export default defineComponent({
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+#adoption {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #f2f2f2;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
