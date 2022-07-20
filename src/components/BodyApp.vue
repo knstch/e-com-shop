@@ -1,6 +1,16 @@
 <template>
   <main>
-    <router-view></router-view>
+    <router-view
+      :favProds="favProds"
+      :productsContainer="productsContainer"
+      :cart="cart"
+      v-on:createCatalog="createCatalog"
+      v-on:displayModal="displayModal"
+      v-on:closeModal="closeModal"
+      v-on:addToCart="addToCart"
+      v-on:addToFav="addToFav"
+      v-on:removeFav="removeFav"
+    ></router-view>
     <CartBuy v-if="showModal == false" @click="displayModal()"></CartBuy>
     <BuyModal
       v-else-if="showModal == true"
@@ -56,6 +66,12 @@ export default defineComponent({
     if (this.cart.length < 3) this.isFewProducts = true;
   },
   methods: {
+    async createCatalog(catalog: string) {
+      const getProducts = await axios.get(
+        `http://localhost:3000/api/shop-items/${catalog}`
+      );
+      this.productsContainer = getProducts.data;
+    },
     displayModal(): boolean {
       return (this.showModal = true);
     },
@@ -90,6 +106,9 @@ export default defineComponent({
     removeFav(productId: string) {
       this.favProds = this.favProds.filter((product) => product != productId);
       localStorage.setItem("favItems", JSON.stringify(this.favProds));
+    },
+    aboba() {
+      console.log(1);
     },
   },
 });

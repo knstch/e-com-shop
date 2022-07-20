@@ -45,76 +45,36 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
-
-declare interface Product {
-  _id: string;
-  img: string;
-  name: string;
-  desc: string;
-  price: number;
-}
-
-declare interface Cart {
-  _id: string;
-  quanity: number;
-  leftItems?: any;
-}
 
 export default defineComponent({
   name: "AllProducts",
   data() {
     return {
-      showModal: false as boolean,
-      productsContainer: [] as Product[],
-      cart: [] as Cart[],
-      favProds: [] as string[],
+      catalogListProducts: "" as string,
     };
   },
+  props: ["favProds", "cart", "productsContainer"],
   async mounted() {
-    const getProducts = await axios.get("http://localhost:3000/api/shop-items");
-    this.productsContainer = getProducts.data;
-    if (localStorage.getItem("cartItems")) {
-      this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
-    }
-    if (localStorage.getItem("favItems")) {
-      this.favProds = JSON.parse(localStorage.getItem("favItems") as string);
-    }
+    this.createCatalog(this.catalogListProducts);
   },
   methods: {
-    displayModal(): boolean {
-      return (this.showModal = true);
+    createCatalog(catalog: string) {
+      this.$emit("createCatalog", catalog);
     },
-    closeModal(): boolean {
-      return (this.showModal = false);
+    displayModal() {
+      this.$emit("displayModal");
+    },
+    closeModal() {
+      this.$emit("closeModal");
     },
     addToCart(productId: string) {
-      this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
-      let cartItem;
-      for (let i = 0; i < this.cart.length; i++) {
-        if (this.cart[i]._id == productId) {
-          cartItem = this.cart[i];
-        }
-      }
-
-      if (cartItem) {
-        cartItem.quanity++;
-      } else if (!cartItem) {
-        this.cart.unshift({ _id: productId, quanity: 1 });
-      }
-      localStorage.setItem("cartItems", JSON.stringify(this.cart));
+      this.$emit("addToCart", productId);
     },
     addToFav(productId: string) {
-      let checkFavProduct = this.favProds.includes(productId);
-      if (checkFavProduct == false) {
-        this.favProds.unshift(productId);
-        localStorage.setItem("favItems", JSON.stringify(this.favProds));
-        console.log(this.favProds);
-      }
+      this.$emit("addToFav", productId);
     },
     removeFav(productId: string) {
-      this.favProds = this.favProds.filter((product) => product != productId);
-      localStorage.setItem("favItems", JSON.stringify(this.favProds));
+      this.$emit("removeFav", productId);
     },
   },
 });

@@ -26,4 +26,17 @@ export default defineComponent({
   padding: 0;
   font-family: "Albert Sans", sans-serif;
 }
+::-webkit-scrollbar {
+  width: 10px; /* ширина нового скроллбара */
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 </style>

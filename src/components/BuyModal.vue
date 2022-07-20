@@ -146,6 +146,7 @@ export default defineComponent({
     flex-direction: column;
     gap: 20px;
     height: auto;
+    max-height: 400px;
     background: #ddd;
     width: 320px;
     background-color: #f2f2f2;
@@ -186,11 +187,13 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       gap: 15px;
+      overflow-y: auto;
       .cart-item {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        padding: 5px;
         .cart-item-left {
           display: flex;
           flex-direction: row;

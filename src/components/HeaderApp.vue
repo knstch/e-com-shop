@@ -18,13 +18,6 @@
             <a class="link" href="#/spicypizza"><li>Spicy pizza</li></a>
           </ul>
         </div>
-        <div class="dropdown-menu">
-          About me
-          <ul class="dropdown">
-            <li>Info</li>
-            <li>Contacts</li>
-          </ul>
-        </div>
       </div>
       <div class="search-filed">
         <input
@@ -200,19 +193,6 @@ export default defineComponent({
       justify-self: flex-end;
       position: relative;
       width: 250px;
-      ::-webkit-scrollbar {
-        width: 10px; /* ширина нового скроллбара */
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 5px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
       #search {
         height: 35px;
         line-height: 35px;
