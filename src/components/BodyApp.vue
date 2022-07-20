@@ -59,13 +59,20 @@ export default defineComponent({
   methods: {
     //Load data from DB to array to render products in catalog
     async createCatalog(catalog?: string) {
-      const getProducts = await axios.get(
-        `http://localhost:3000/api/shop-items/${catalog}`
-      );
-      this.productsContainer = getProducts.data;
+      if (!catalog) {
+        const getProducts = await axios.get(
+          `http://localhost:3000/api/shop-items/`
+        );
+        this.productsContainer = getProducts.data;
+      } else {
+        const getProducts = await axios.get(
+          `http://localhost:3000/api/shop-items/${catalog}`
+        );
+        this.productsContainer = getProducts.data;
+      }
     },
     //Load cart and favorite products from local storage
-    //Also, change catalog style if there're < 3 items
+    //Also, change catalog style if there're less then 3 items
     loadStorage() {
       if (localStorage.getItem("cartItems")) {
         this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
@@ -75,11 +82,12 @@ export default defineComponent({
       }
       if (this.cart.length < 3) this.isFewProducts = true;
     },
+    //Open / close modal cart window
     displayModal(condition: boolean): boolean {
       return (this.showModal = condition);
     },
+    //Adds products to the cart
     addToCart(productId: string) {
-      console.log(productId);
       this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
       let cartItem;
       for (let i = 0; i < this.cart.length; i++) {
@@ -95,6 +103,7 @@ export default defineComponent({
       }
       localStorage.setItem("cartItems", JSON.stringify(this.cart));
     },
+    //Add products to favorite list
     addToFav(productId: string) {
       let checkFavProduct = this.favProds.includes(productId);
       if (checkFavProduct == false) {
@@ -103,6 +112,7 @@ export default defineComponent({
         console.log(this.favProds);
       }
     },
+    //Remove products from favorite list
     removeFav(productId: string) {
       this.favProds = this.favProds.filter((product) => product != productId);
       localStorage.setItem("favItems", JSON.stringify(this.favProds));

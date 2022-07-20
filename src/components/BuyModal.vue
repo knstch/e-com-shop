@@ -56,7 +56,12 @@ export default defineComponent({
       totalCost: 0 as number, //Total cost of items in cart
     };
   },
+  async mounted() {
+    //Sets the cart, when we load the page
+    await this.setCart();
+  },
   methods: {
+    //Read BodyApp
     displayModal(condition: boolean) {
       this.$emit("displayModal", condition);
     },
@@ -118,10 +123,6 @@ export default defineComponent({
         }
       }
     },
-  },
-  async mounted() {
-    //Sets the cart, when we load the page
-    await this.setCart();
   },
 });
 </script>
