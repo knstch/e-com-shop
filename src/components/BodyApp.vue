@@ -8,6 +8,9 @@
       v-on:addToCart="addToCart"
       v-on:addToFav="addToFav"
       v-on:removeFav="removeFav"
+      v-slot="{ Component }"
+      ><transition name="catalog-page" :is="Component" mode="out-in"
+        ><component :is="Component" /></transition
     ></router-view>
     <CartBuy v-if="showModal == false" @click="displayModal(true)"></CartBuy>
     <BuyModal
@@ -59,6 +62,7 @@ export default defineComponent({
   methods: {
     //Load data from DB to array to render products in catalog
     async createCatalog(catalog?: string) {
+      this.productsContainer = [];
       if (!catalog) {
         const getProducts = await axios.get(`/api/shop-items/`);
         this.productsContainer = getProducts.data;
@@ -216,5 +220,23 @@ main {
 }
 .fewProducts {
   justify-content: space-around;
+}
+
+.catalog-page-enter-active {
+  height: 100vh;
+  animation: opacityFromZero 0.6s ease;
+}
+
+.catalog-page-leave-active {
+  animation: opacityFromZero 0.6s ease reverse;
+}
+
+@keyframes opacityFromZero {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
