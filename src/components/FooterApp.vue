@@ -21,6 +21,10 @@ export default {};
   a {
     color: #f2f2f2;
     text-decoration: none;
+    transition: transform 0.2s;
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
 </style>

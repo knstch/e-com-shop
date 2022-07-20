@@ -172,11 +172,11 @@ export default defineComponent({
       top: 15px;
       transition: color 0.2s;
       transition: border 0.2s;
-    }
-    .close-modal:hover {
-      border: 2px solid #f32424;
-      border-radius: 100%;
-      color: #f32424;
+      &:hover {
+        border: 2px solid #f32424;
+        border-radius: 100%;
+        color: #f32424;
+      }
     }
     .cart-empty {
       font-size: 24px;
@@ -245,12 +245,12 @@ export default defineComponent({
               padding: 3px;
               user-select: none;
               transition: background-color 0.2s;
-            }
-            .change-number-btn:hover {
-              background-color: #f2f2f2;
-              color: #764af1;
-              outline: 1px solid #764af1;
-              outline-offset: -1px;
+              &:hover {
+                background-color: #f2f2f2;
+                color: #764af1;
+                outline: 1px solid #764af1;
+                outline-offset: -1px;
+              }
             }
           }
         }

@@ -78,6 +78,7 @@ export default defineComponent({
     };
   },
   methods: {
+    //Finds products in search
     async findProduct() {
       if (this.searchInput != "") {
         const getSearchProducts = await axios.get(
@@ -90,6 +91,7 @@ export default defineComponent({
         this.isSearchActive = false;
       }
     },
+    //Adds products to the cart
     addToCart(productId: string) {
       this.cart = JSON.parse(localStorage.getItem("cartItems") as string);
       let cartItem;
@@ -168,13 +170,11 @@ export default defineComponent({
           background-color: #f2f2f2;
           color: #764af1;
           transition: color 0.3s;
+          &:hover {
+            color: #f2f2f2;
+            background: #9772fb;
+          }
         }
-
-        li:hover {
-          color: #f2f2f2;
-          background: #9772fb;
-        }
-
         .dropdown {
           position: absolute;
           width: 200px;
@@ -248,13 +248,13 @@ export default defineComponent({
             border-radius: 5px;
             background-color: #fff;
             transition: background-color 0.2s;
+            &:hover {
+              background-color: #dbdada;
+            }
             .button-svg {
               height: 25px;
               width: 25px;
             }
-          }
-          .found-product-button:hover {
-            background-color: #dbdada;
           }
         }
       }

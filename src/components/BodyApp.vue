@@ -60,14 +60,10 @@ export default defineComponent({
     //Load data from DB to array to render products in catalog
     async createCatalog(catalog?: string) {
       if (!catalog) {
-        const getProducts = await axios.get(
-          `http://localhost:3000/api/shop-items/`
-        );
+        const getProducts = await axios.get(`/api/shop-items/`);
         this.productsContainer = getProducts.data;
       } else {
-        const getProducts = await axios.get(
-          `http://localhost:3000/api/shop-items/${catalog}`
-        );
+        const getProducts = await axios.get(`/api/shop-items/${catalog}`);
         this.productsContainer = getProducts.data;
       }
     },
@@ -168,17 +164,14 @@ main {
       h2 {
         text-align: center;
       }
-
       .price {
         text-align: center;
       }
     }
-
     .button-actions {
       display: flex;
       flex-direction: row;
       gap: 10px;
-
       .favorite {
         cursor: pointer;
         background-color: #f32424 !important;
@@ -189,24 +182,21 @@ main {
         transition: background-color 0.2s;
         transition: outline 0.2s;
         transition: color 0.2s;
+        &:hover {
+          background-color: #f2f2f2 !important;
+          color: #f32424;
+          outline: 1px solid #f32424;
+          outline-offset: -1px;
+        }
       }
-
-      .favorite:hover {
-        background-color: #f2f2f2 !important;
-        color: #f32424;
-        outline: 1px solid #f32424;
-        outline-offset: -1px;
-      }
-
       .remove {
         background-color: #f2f2f2 !important;
         color: #f32424 !important;
+        &:hover {
+          background-color: #f32424 !important;
+          color: #f2f2f2 !important;
+        }
       }
-      .remove:hover {
-        background-color: #f32424 !important;
-        color: #f2f2f2 !important;
-      }
-
       .add-cart {
         cursor: pointer;
         background-color: #764af1;
@@ -215,13 +205,12 @@ main {
         border: 0;
         border-radius: 5px;
         transition: background-color 0.2s;
-      }
-
-      .add-cart:hover {
-        background-color: #f2f2f2;
-        color: #9772fb;
-        outline: 1px solid #9772fb;
-        outline-offset: -1px;
+        &:hover {
+          background-color: #f2f2f2;
+          color: #9772fb;
+          outline: 1px solid #9772fb;
+          outline-offset: -1px;
+        }
       }
     }
   }

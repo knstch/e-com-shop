@@ -26,6 +26,9 @@ export default {};
   background-color: rgba(255, 255, 255, 0.75);
   border: 2px solid #f32424;
   transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.1);
+  }
   .cart-img {
     position: absolute;
     height: 40px;
@@ -33,8 +36,5 @@ export default {};
     top: 14px;
     right: 16px;
   }
-}
-.cart:hover {
-  transform: scale(1.1);
 }
 </style>

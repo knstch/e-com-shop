@@ -58,6 +58,7 @@ export default defineComponent({
     this.createCatalog(this.catalogListProducts);
   },
   methods: {
+    //Read BodyApp comments
     createCatalog(catalog: string) {
       this.$emit("createCatalog", catalog);
     },
