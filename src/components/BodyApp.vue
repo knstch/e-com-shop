@@ -105,7 +105,6 @@ export default defineComponent({
       if (checkFavProduct == false) {
         this.favProds.unshift(productId);
         localStorage.setItem("favItems", JSON.stringify(this.favProds));
-        console.log(this.favProds);
       }
     },
     //Remove products from favorite list

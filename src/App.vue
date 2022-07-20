@@ -25,7 +25,6 @@ export default defineComponent({
   methods: {
     getWidth() {
       this.screenWidth = window.innerWidth;
-      console.log(this.screenWidth);
     },
   },
   created() {

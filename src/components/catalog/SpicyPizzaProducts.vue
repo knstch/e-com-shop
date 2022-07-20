@@ -50,7 +50,7 @@ export default defineComponent({
   name: "SpicyPizzaProducts",
   data() {
     return {
-      catalogListProducts: "spicypizza" as string,
+      catalogListProducts: "spicy pizza" as string,
     };
   },
   props: ["favProds", "cart", "productsContainer"],

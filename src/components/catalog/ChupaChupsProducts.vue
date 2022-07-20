@@ -50,7 +50,7 @@ export default defineComponent({
   name: "ChupaChupsProducts",
   data() {
     return {
-      catalogListProducts: "chupachups" as string,
+      catalogListProducts: "chupa chups" as string,
     };
   },
   props: ["favProds", "cart", "productsContainer"],
