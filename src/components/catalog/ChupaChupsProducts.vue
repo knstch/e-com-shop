@@ -55,7 +55,7 @@ export default defineComponent({
   },
   props: ["favProds", "cart", "productsContainer"],
   async mounted() {
-    this.createCatalog(this.catalogListProducts);
+    this.createCatalog("category/" + this.catalogListProducts);
   },
   methods: {
     //Read BodyApp comments

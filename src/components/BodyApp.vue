@@ -67,7 +67,7 @@ export default defineComponent({
         const getProducts = await axios.get(`/api/shop-items/`);
         this.productsContainer = getProducts.data;
       } else {
-        const getProducts = await axios.get(`/api/shop-items/category/${catalog}`);
+        const getProducts = await axios.get(`/api/shop-items/${catalog}`);
         this.productsContainer = getProducts.data;
       }
     },
